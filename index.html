@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wifak - Crypto Dashboard</title>
+<title>Wifak - Crypto Hub</title>
 
 <style>
 body{
@@ -16,7 +16,7 @@ text-align:center;
 
 header{
 padding:20px;
-font-size:28px;
+font-size:30px;
 font-weight:bold;
 color:#00ffff;
 }
@@ -34,58 +34,105 @@ margin:auto;
 background:rgba(255,255,255,0.05);
 padding:15px;
 border-radius:15px;
-box-shadow:0 0 15px rgba(0,255,255,0.1);
 transition:0.3s;
+box-shadow:0 0 15px rgba(0,255,255,0.1);
 }
 
 .card:hover{
 transform:scale(1.05);
-box-shadow:0 0 25px rgba(0,255,255,0.3);
 }
 
 .price{
-font-size:18px;
-margin-top:10px;
 color:#00ffff;
+margin-top:10px;
 }
 
-small{
-color:#aaa;
+.calc{
+max-width:400px;
+margin:40px auto;
+padding:20px;
+background:rgba(255,255,255,0.05);
+border-radius:20px;
+box-shadow:0 0 20px rgba(0,255,255,0.2);
 }
 
-footer{
-margin-top:20px;
-font-size:12px;
-color:#666;
+input{
+width:90%;
+padding:10px;
+margin:8px 0;
+border-radius:10px;
+border:none;
+outline:none;
+}
+
+button{
+width:95%;
+padding:10px;
+background:#00ffff;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.result{
+margin-top:15px;
+color:#00ffff;
+font-size:18px;
 }
 </style>
 </head>
 
 <body>
 
-<header>🚀 WIFAK CRYPTO DASHBOARD</header>
+<header>🚀 WIFAK CRYPTO HUB</header>
 
+<!-- CRYPTO SECTION -->
 <div class="container">
 
-<div class="card">₿ Bitcoin<div class="price">$43,000</div><small>BTC</small></div>
-
-<div class="card">Ξ Ethereum<div class="price">$2,300</div><small>ETH</small></div>
-
-<div class="card">🟡 Binance Coin<div class="price">$310</div><small>BNB</small></div>
-
-<div class="card">💧 Ripple<div class="price">$0.52</div><small>XRP</small></div>
-
-<div class="card">💎 Solana<div class="price">$98</div><small>SOL</small></div>
-
-<div class="card">🐕 Dogecoin<div class="price">$0.08</div><small>DOGE</small></div>
-
-<div class="card">🌐 Cardano<div class="price">$0.45</div><small>ADA</small></div>
-
-<div class="card">⚡ Polygon<div class="price">$0.90</div><small>MATIC</small></div>
+<div class="card">₿ Bitcoin<div class="price">$43,000</div></div>
+<div class="card">Ξ Ethereum<div class="price">$2,300</div></div>
+<div class="card">🟡 BNB<div class="price">$310</div></div>
+<div class="card">💧 XRP<div class="price">$0.52</div></div>
+<div class="card">💎 Solana<div class="price">$98</div></div>
+<div class="card">🐕 Dogecoin<div class="price">$0.08</div></div>
 
 </div>
 
-<footer>© 2026 Wifak | Crypto Dashboard</footer>
+<!-- CALCULATOR -->
+<div class="calc">
+
+<h2>💰 Profit Calculator</h2>
+
+<input id="buy" placeholder="Buy Price">
+<input id="sell" placeholder="Sell Price">
+<input id="amount" placeholder="Amount">
+
+<button onclick="calc()">Calculate</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+function calc(){
+let buy = parseFloat(document.getElementById("buy").value);
+let sell = parseFloat(document.getElementById("sell").value);
+let amount = parseFloat(document.getElementById("amount").value);
+
+if(!buy || !sell || !amount){
+document.getElementById("result").innerHTML = "⚠️ Fill all fields";
+return;
+}
+
+let profit = (sell - buy) * amount;
+let roi = ((sell - buy) / buy) * 100;
+
+document.getElementById("result").innerHTML =
+"💰 Profit: $" + profit.toFixed(2) +
+"<br>📊 ROI: " + roi.toFixed(2) + "%";
+}
+</script>
 
 </body>
 </html>
